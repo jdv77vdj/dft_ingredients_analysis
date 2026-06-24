@@ -2,7 +2,7 @@ In this folder we have several files to analyse the ingredients of the pristine 
 
 **Folders with ingredients**\
 Si: Contains the Silicon diamond pristine outputs.\
-T: Contains the Tetrahedral interstital T.\
+T: Contains the Tetrahedral interstital T.
 
 All folders contain:
   AECCAR0, AECCAR2, CHGCAR, ELFCAR, POSCAR files coming from VASP.\
