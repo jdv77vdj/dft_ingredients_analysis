@@ -1,6 +1,7 @@
 In this folder we have several files to analyse the ingredients of the pristine and defective (monovacant) fcc metals.
 
 **Folders with ingredients**\
+Since the folders are heavy we did not upload them, please send an email to jvega5@tulane.edu for requesting the computed ingredient files. Also you can see the files for Si-diamond, which are available in this repository.\ 
 The metals analyzed are Al, Ni, Pd, Pt, Ag, Au, Pt, Pb.
 For each metal we have the next structure:\
     metal\_name->{metal\_name, metal\_name\_v}\
