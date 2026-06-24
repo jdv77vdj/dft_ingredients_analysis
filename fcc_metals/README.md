@@ -2,18 +2,17 @@ In this folder we have several files to analyse the ingredients of the pristine 
 
 **Folders with ingredients**\
 The metals analyzed are Al, Ni, Pd, Pt, Ag, Au, Pt, Pb.
-For each metal we have the next structure:
-    metal\_name
-        metal
+For each metal we have the next structure:\
+    metal\_name->{metal\_name, metal\_name\_v}\
+    
+The subfolder named metal\_name has the pristine structure and the subfolder metal\_name\_v has the defective structure with a monovacancy. 
             
-: Contains the Silicon diamond pristine outputs.\
-T: Contains the Tetrahedral interstital T. \
-
 All folders contain:
   AECCAR0, AECCAR2, CHGCAR, ELFCAR, POSCAR files coming from VASP.\
-  data_2D.dat: contains the computed ingredients in 2D from the generator file 2d_ingredients_generator_silicon.py.\
-  1d_data_path_ae.dat: contains computed ingredients along one line (or path) from the 1d_ingredients_generator_silicon_given_2_positions.py file.\
+  data_2D.dat: contains the computed ingredients in 2D from the generator file 2d_ingredients_generator_metals.py.\
+  1d_data_path_ae.dat: contains computed ingredients along one line (or path) from the 1d_ingredients_generator_metals_given_2_positions.py file or 1d_ingredients_generator_given_3_positions.py.\
   Note that for running the generator .py files, generate_Fx.py must be present.\
+  There is also one script named 1d_ingredients_generator_metals_original_version.py which works for the 1d case, although this is the first version of the code and only works for 2 atoms
 
 **Scripts**\
 We have one set of scripts for generating the DFAs ingredients and another set of scripts for plotting them. These scripts are in 2 folders: 1d and 2d. \
@@ -22,5 +21,5 @@ The workflow to generate ingredients is the next:\
 2. Plot ingredients with .py script accordingly. \
 
 **Excel file with defect formation energies**
-It contains the defect formation energies obtained with all DFAs. While in the scripts for plotting, we don't need this Excel file, if you'd like to add a bar of defect formation energies, having the Excel file might be useful. 
+It contains the defect formation energies obtained with all DFAs for the fcc metals. This file is needed to generate the bar plots shown in the \Delta R\_{xc} figurs
 
