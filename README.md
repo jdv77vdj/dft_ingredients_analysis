@@ -13,5 +13,4 @@ This package includes 2 main folders:
 * Si_diamond
 * fcc_metals
 
-Each folder contains Python codes for generating the ingredients and then plotting them in 1D and 2D. 
-The Si_diamond folder has the ouputs from VASP to generate the figures.
+Each folder contains Python codes for generating the ingredients and then plotting them in 1D and 2D. Each folder has its own README and also the scripts explain what the inputs and ouputs are. All the scripts were run on Python 3.12.2. The VASP outputs were generated with VASP 6.5.1. In this repository only the Si_diamond folder has the ouputs from VASP to generate the figures. For the fcc metals' ingredients contact the authors. 
