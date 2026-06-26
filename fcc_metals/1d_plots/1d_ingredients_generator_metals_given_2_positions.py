@@ -11,6 +11,9 @@ import numpy as np
 ### Use this file first to generate the ingredients given the positions of 2 atoms, then plot them :)
 ### Example: python 1d_ingredients_generator_metals_given_2_positions.py -a -p
 
+### Required input files: VASP outputs AECCAR0, AECCAR2, CHGCAR, ELFCAR
+### Outputs files: .dat file with the ingredients on each system's folder.
+
 BASE_PATH = '/Users/jdv/Desktop/Tulane/Tulane-Research/Projects/Defects_SCAN/fcc_metals_vac_formation_energy/updated_ingredients_May19_metals_only'
 
 

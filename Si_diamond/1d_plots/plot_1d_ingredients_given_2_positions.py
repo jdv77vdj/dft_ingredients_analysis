@@ -10,6 +10,10 @@ from matplotlib.lines import Line2D
 
 
 ### Script to plot ingredients of Si-diamond given 2 positions
+### For Silicon see the notes about spin below. This is the main difference with the metals.
+
+### Inputs: .dat files present in all folders for the pristine and defective system (T for instance).
+### Outputs: One PDF file containing 1rowx3columns plot with \Delta(1/R_{xc}), \Delta ingredients and Pure ingredientes.
 
 # =========  Global style controls  =========
 FIGSIZE = (11, 4.5)

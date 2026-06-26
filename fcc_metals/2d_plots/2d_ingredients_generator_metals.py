@@ -11,6 +11,9 @@ import numpy as np
 ### Script to generate the ingredients in 2D for the fcc metals
 ### Make sure you are in the right BASE_PATH
 
+### Required input files: VASP outputs AECCAR0, AECCAR2, CHGCAR, ELFCAR
+### Outputs files: .dat file with the ingredients on each system's folder.
+
 BASE_PATH = '/Users/jdv/Desktop/Tulane/Tulane-Research/Projects/Defects_SCAN/fcc_metals_vac_formation_energy/updated_ingredients_April19_2d_ingredients'
 
 sys.path.append(BASE_PATH)

@@ -8,6 +8,10 @@ from matplotlib.lines import Line2D
 
 ### Script for plotting DFAs ingredients in 1D: R_{xc}, \Delta R_{xc}, \Delta ingredients and plain ingredients for all metals: main group (Al, Ni, Pd, Pt) and supplemental (Cu, Ag, Au and Pb).
 
+### Inputs: .dat files present in all folders for all metals pristine and defective, Excel file having the defect formation energies for plotting the bar plots of defect formation energies for all DFAs.
+### Outputs: 2 grid plots: main_metals.pdf, having Al, Ni, Pd, Pt; and supplement_metals.pdf having Cu, Ag, Au and Pb. Since we give 3 positions (a path), the prouced plots depict nicely the trends over the chosen path. This was not shown in the main paper but is still useful for analyzing the ingredients. 
+
+
 # =========  Global style controls  =========
 BASE_FONT = 24
 LEGENDS = 22

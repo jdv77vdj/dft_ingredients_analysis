@@ -5,6 +5,9 @@ import os
 
 ### Script for plotting ingredients in 2D
 
+### Inputs: .dat files present in all folders for all metals pristine and defective.
+### Outputs: A folder with one PDF figure for each metal with a grid of 3x3: each row has r_s, s and alpha, and each column is for pristine, defective, and each respective \Delta Ingredient
+
 plt.rcParams.update({
     "font.size": 30,          # base font
     "axes.titlesize": 34,     # subplot titles

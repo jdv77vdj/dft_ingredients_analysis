@@ -6,43 +6,50 @@ import subprocess
 import re
 import math
 import sys
-#sys.path.append('/Users/tlebeda/Documents/scripts')
-BASE_PATH = '/Users/jdv/Desktop/Tulane/Tulane-Research/Projects/Defects_SCAN/fcc_metals_vac_formation_energy/updated_ingredients_March6'
 
-BASE_PATH = '/Users/jdv/Desktop/Tulane/Tulane-Research/Projects/Defects_SCAN/fcc_metals_vac_formation_energy/updated_ingredients_April19_2d_ingredients'
+
+### Script to generate 1D ingredients, the orignal version for the fcc metals only.
+### Example for executing it: python ingredients_generator_1d_original.py -a -p
+### Make sure to also have: generate_Fx.py in the same folder.
+
+### Required input files: Folders with VASP outputs for pristine and defective systems.
+### Outputs files: data.dat file, written for all systems.
+
+BASE_PATH = '/Users/jdv/Desktop/Tulane/Tulane-Research/Projects/Defects_SCAN/fcc_metals_vac_formation_energy/updated_ingredients_March6'
 
 sys.path.append(BASE_PATH)
 import generate_Fx as Fx
 
-#testset = 'BG'   # set of 14 band gaps from TASK-prr paper
 
-systems = dict() ### generate an empty dictionary
+systems = dict()
   # koff is the offset required to plot a binding region path that includes the vacancy, since the vacyncy is at different positions for different systems.
   # LCs in Angstrom, but twice the  (important for calculating the gradient!)
-
-### Each metal is stored in the previous empty dictionary.
 systems['Al']    = {'lattice_const': 8.036000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
 systems['Alv']   = {'lattice_const': 8.036000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Cu']    = {'lattice_const': 7.190000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Cuv']   = {'lattice_const': 7.190000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Ag']    = {'lattice_const': 8.124000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Agv']   = {'lattice_const': 8.124000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Au']    = {'lattice_const': 8.124000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Auv']   = {'lattice_const': 8.124000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Ni']    = {'lattice_const': 7.016000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Niv']   = {'lattice_const': 7.016000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Pd']    = {'lattice_const': 7.752000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Pdv']   = {'lattice_const': 7.752000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Pt']    = {'lattice_const': 7.826000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Ptv']   = {'lattice_const': 7.826000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Pb']    = {'lattice_const': 9.824000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-#systems['Pbv']   = {'lattice_const': 9.824000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
-
+systems['Cu']    = {'lattice_const': 7.190000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Cuv']   = {'lattice_const': 7.190000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Ag']    = {'lattice_const': 8.124000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Agv']   = {'lattice_const': 8.124000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Au']    = {'lattice_const': 8.124000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Auv']   = {'lattice_const': 8.124000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+#systems['Rh']    = {'lattice_const': 7.588000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+#systems['Rhv']   = {'lattice_const': 7.588000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Ni']    = {'lattice_const': 7.016000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Niv']   = {'lattice_const': 7.016000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Pd']    = {'lattice_const': 7.752000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Pdv']   = {'lattice_const': 7.752000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Pt']    = {'lattice_const': 7.826000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Ptv']   = {'lattice_const': 7.826000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Pb']    = {'lattice_const': 9.824000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+systems['Pbv']   = {'lattice_const': 9.824000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
 
 systems['Ir']    = {'lattice_const': 7.662000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+#systems['Irv']   = {'lattice_const': 7.662000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+#systems['Pb']    = {'lattice_const': 9.824000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+#systems['Pbv']   = {'lattice_const': 9.824000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+#systems['Th']    = {'lattice_const': 10.142000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
+#systems['Thv']   = {'lattice_const': 10.142000, 'kxoff': .5, 'kyoff': .5, 'kzoff': .5, 'yp': 0.25}
 
-#systems['Si']     = {'lattice_const': 10.860000, 'kxoff': .375, 'kyoff': .375, 'kzoff': .375, 'yp': 0.0}    # needs NO /2 in ELFCAR due to spin
-#systems['Siv']   = {'lattice_const': 10.860000, 'kxoff': .375, 'kyoff': .375, 'kzoff': .375, 'yp': 0.0}    # needs NO /2 in ELFCAR due to spin
 
 xyz_dir = '_xyz'
 
@@ -60,18 +67,14 @@ def rewrite_ELFCAR(nuclei=False, path=False, twodim=False, xc_func='lda'):    #T
         # read ELFCAR
         ELFCAR = os.path.join(dir, 'ELFCAR')
         print(f"Checking file exists: {ELFCAR}")
-        print("Exists?", os.path.isfile(ELFCAR)) ### If file exists, then it yields True.
+        print("Exists?", os.path.isfile(ELFCAR))
         assert (os.path.isfile(ELFCAR)), ELFCAR + " not existing!"
-        
-        ### Find the FFT grid dimensions line and extract NGX
         input = open(ELFCAR, 'r')
-        NGX = int(re.findall(' ([0-9]+)[ \t]+[0-9]+[ \t]+[0-9]+', input.read())[0]) ### This is a number
+        NGX = int(re.findall(' ([0-9]+)[ \t]+[0-9]+[ \t]+[0-9]+', input.read())[0])
         NGY = NGX
         NGZ = NGX
         print(f'NGX: {NGX}')
         input = open(ELFCAR, 'r')
-        
-        ### Extract all ELF values from file into a flat list
         ELF = re.findall(r' [0-9].[0-9]{5}[ E][\-\+]?[0-9]?[0-9]?', input.read())#jv
         #ELF = re.findall(' [0-9].[0-9]{5}[ E][\-\+]?[0-9]?[0-9]?', input.read())
         len_ELF = int(len(ELF)/2)    # Divide by two because both spins included.
@@ -84,16 +87,13 @@ def rewrite_ELFCAR(nuclei=False, path=False, twodim=False, xc_func='lda'):    #T
         CHGCAR = os.path.join(dir, 'AECCAR2')#'CHGCAR')
         assert (os.path.isfile(CHGCAR)), CHGCAR + " not existing!"
         input = open(CHGCAR, 'r')
-        
-        ### IfAECCCAR2 is read, then we exctract valence density: RhoV
-        RhoV = re.findall(r' [0-9\-].[0-9]{11}[ E][\-\+]?[0-9]?[0-9]?', input.read()) #jv
+        RhoV = re.findall(r' [0-9\-].[0-9]{11}[ E][\-\+]?[0-9]?[0-9]?', input.read())
         #RhoV = re.findall(' [0-9\-].[0-9]{11}[ E][\-\+]?[0-9]?[0-9]?', input.read())
         len_RhoV = len(RhoV)
         if NGX*NGX*NGX!=len_RhoV:  # *8, if NGXF = 2*NGX and analogous for y, z
             print(f'ERROR:  NGXF*NGYF*NGZF != len(RhoV) for system: {system} !!!')
         print(f'len(RhoV): {len_RhoV}')
         
-        ### Extract the Core density
         # read AECCAR0
         COREDENS = os.path.join(dir, 'AECCAR0')#CHGCAR')
         assert (os.path.isfile(COREDENS)), COREDENS + " not existing!"
@@ -112,9 +112,6 @@ def rewrite_ELFCAR(nuclei=False, path=False, twodim=False, xc_func='lda'):    #T
         kyoff = properties['kyoff']
         kzoff = properties['kzoff']
         yp = properties['yp']
-        
-        ### Here Vcell is computed in Angstrom^3.
-        ### Think of extracting this directly from POSCAR or CHGCAR.
         Vcell = (lattice_const/bohr2A)**3
         dx = lattice_const/float(NGX)
         x = [0.0]*len_ELF
@@ -134,9 +131,9 @@ def rewrite_ELFCAR(nuclei=False, path=False, twodim=False, xc_func='lda'):    #T
         print(f'Valenzdichte: {Rho_val}')
         for k in range(0,len_ELF):
             x[k] = float(k%NGX) * dx
-            y[k] = float((k//NGX)%NGY) * dx  # float(math.floor(k/NGX)%NGY) * dx # k // N means floor(k/N)
-            z[k] = float((k//(NGX*NGY))%NGZ) * dx # float(math.floor((k/NGX)/NGY)%NGZ) * dx
-     #Rho[k] = float(RhoV[k])/Vcell
+            y[k] = float((k//NGX)%NGY) * dx             # float(math.floor(k/NGX)%NGY) * dx             # k // N means floor(k/N)
+            z[k] = float((k//(NGX*NGY))%NGZ) * dx       # float(math.floor((k/NGX)/NGY)%NGZ) * dx
+     #       Rho[k] = float(RhoV[k])/Vcell
             if Rho[k] > 0.0:
                 s[k] = calc_s_single_k(k, NGX, dx, Rho)
                 alpha[k] = math.sqrt((1./float(ELF[k])-1.))

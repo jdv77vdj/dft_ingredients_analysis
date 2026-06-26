@@ -12,6 +12,9 @@ import numpy as np
 ### Use this file first to generate the ingredients, then plot them :)
 ### Example: python 2d_ingredients_generator_silicon.py -a -t
 
+### Required input files: VASP outputs AECCAR0, AECCAR2, CHGCAR, ELFCAR
+### Outputs files: .dat file with the ingredients on each system's folder.
+
 
 ### Specify path where all folders with ingredients are
 BASE_PATH = '/Users/jdv/Desktop/Tulane/Tulane-Research/Projects/Defects_SCAN/fcc_metals_vac_formation_energy/updated_ingredients_May19_silicon_only'
