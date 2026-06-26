@@ -6,7 +6,7 @@ import os
 ### Plotting script of 2D ingredients r_s, s, and alpha.
 ### Make sure you have the .dat files inside each folder on your base_path.
 
-### Inputs: .dat files present in all folders for all metals pristine and defective.
+### Inputs: .dat files present in all folders for all metals pristine and defective, T_def_image.png (which has no background) to be added in the background of the plots.
 ### Outputs: a folder containing PDF(s) with a 3x3 grid composed of r_s (1st row), s (2nd row), and alpha (3rd row). Also, the pristine, defective and \Delta ingredient is depicted in the 1st, 2nd and 3rd columns respectively.
 
 ### Also there is a commetend code at the end to show only the bottom-left quadrant instead of the full frame. Helpful to see more closely at the ingredients :)

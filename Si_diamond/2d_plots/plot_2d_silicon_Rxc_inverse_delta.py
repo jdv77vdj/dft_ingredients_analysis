@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 ### Script to plot the ratio 1/R_{xc} for Si-diamond interstitials
 ### Make sure you are in the same folder with the folders with the generated ingredients.
 
-### Inputs: .dat files present in all folders for all metals pristine and defective.
+### Inputs: .dat files present in all folders for all metals pristine and defective, T_def_image.png (which has no background) to be added in the background of the plots.
 ### Outputs: a PDF(s) with a 1x4 grid with the inverse ratio \Delta(1/R_{xc}) for PBE, LAK, SCAN, and r2SCAN.
 
 
